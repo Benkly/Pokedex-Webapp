@@ -188,4 +188,4 @@ else:
 # Sidebar navigation hint
 with st.sidebar:
     st.markdown("## See More")
-    st.markdown("🧠 **Test Yourself** — Try the Pokémon Quiz!")
+    st.page_link("pages/quiz.py", label="🧠 Test Yourself — Try the Pokémon Quiz")

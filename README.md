@@ -4,7 +4,7 @@ A Streamlit powered web app for browsing Pokémon and testing your type matchup 
 
 >Powered by [PokéAPI](https://pokeapi.co/).
 
->##### [Access the App](https://pokedex-benkly.streamlit.app)
+>**[Access the App](https://pokedex-benkly.streamlit.app)**
 
 ---
 
