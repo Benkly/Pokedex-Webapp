@@ -97,8 +97,10 @@ def display_pokemon(data, species_data=None):
     poke_id = data["id"]
     types = [t["type"]["name"] for t in data["types"]]
     sprite_url = (
-        data["sprites"]["other"]["official-artwork"]["front_default"]
-        or data["sprites"]["front_default"]
+        (data["sprites"].get("other") or {})
+        .get("official-artwork", {})
+        .get("front_default")
+        or data["sprites"].get("front_default")
     )
 
     # Header row
