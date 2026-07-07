@@ -12,6 +12,12 @@ A Streamlit powered web app for browsing Pokémon and testing your type matchup 
 
 All Pokémon data is fetched live from [PokéAPI](https://pokeapi.co/) — no local database required. An internet connection is needed to use the Pokédex search. The quiz runs entirely offline using a built-in type chart.
 
+## Image Rendering
+
+Pokémon sprites (official artwork) are hosted on GitHub's raw content CDN (`raw.githubusercontent.com`). On some corporate networks, VPNs, or under strict browser security policies this domain can be blocked or throttled, which would prevent images loading for affected users.
+
+To work around this, images are fetched server-side in Python and passed directly to Streamlit rather than being loaded by the user's browser. This means the user's browser only ever communicates with the Streamlit server — the CDN request happens on the backend, bypassing any client-side network restrictions.
+
 ## Key Features
 
 ### Pokédex (`app.py`)

@@ -1,6 +1,8 @@
 import streamlit as st
 import requests
 import random
+from PIL import Image
+from io import BytesIO
 
 # --- Page Config ---
 st.set_page_config(
@@ -91,6 +93,17 @@ def stat_bar(stat_name, value, max_val=255):
     col2.caption(str(value))
     col3.progress(value / max_val)
 
+def fetch_image(url):
+    """Fetch image bytes server-side and return a PIL Image, or None on failure.
+    Proxying through the server avoids CDN domains being blocked on restrictive networks."""
+    try:
+        response = requests.get(url, timeout=10)
+        if response.status_code == 200:
+            return Image.open(BytesIO(response.content))
+    except Exception:
+        pass
+    return None
+
 def display_pokemon(data, species_data=None):
     """Render a full Pokemon card."""
     name = data["name"].capitalize()
@@ -108,7 +121,11 @@ def display_pokemon(data, species_data=None):
 
     with col_img:
         if sprite_url:
-            st.image(sprite_url, width=200)
+            img = fetch_image(sprite_url)
+            if img:
+                st.image(img, width=200)
+            else:
+                st.write("No image available")
         else:
             st.write("No image available")
 
